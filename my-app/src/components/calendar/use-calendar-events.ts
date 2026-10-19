@@ -7,6 +7,7 @@ import {
   eventColors,
   loadEvents,
   saveEvents,
+  toDateTimeInputValue,
   updateEvent,
   type CalendarEvent,
   type EventColor,
@@ -59,16 +60,18 @@ export function useCalendarEvents() {
   const fcEvents = useMemo(() => {
     return events.map((event) => {
       const colorInfo = eventColors[event.color];
+      // Colore applicato da FullCalendar come stile inline: funziona in tutte
+      // le viste, compresa l'agenda, dove il colore serve per il pallino.
+      const colorVar = `var(--color-${colorInfo.bg.replace("bg-", "")})`;
       return {
         id: event.id,
         title: event.title,
         start: event.start,
         end: event.end,
         allDay: event.allDay,
-        backgroundColor: colorInfo.bg.replace("bg-", ""),
-        borderColor: colorInfo.border.replace("border-", ""),
+        backgroundColor: colorVar,
+        borderColor: colorVar,
         textColor: "#ffffff",
-        classNames: [colorInfo.bg, colorInfo.border],
         extendedProps: {
           description: event.description,
           color: event.color,
@@ -85,20 +88,21 @@ export function useCalendarEvents() {
     if (!data.start) {
       newErrors.start = "La data di inizio è obbligatoria";
     }
-    if (!data.allDay && data.end && new Date(data.end) <= new Date(data.start)) {
-      newErrors.end = "La data di fine deve essere successiva a quella di inizio";
+    // La fine è facoltativa: si controlla solo se è stata compilata.
+    if (!data.allDay && data.end && data.start && new Date(data.end) <= new Date(data.start)) {
+      newErrors.end = "L'orario di fine deve essere successivo a quello di inizio";
     }
     return newErrors;
   }
 
   function openCreateModal(date?: Date) {
     setEditingEvent(null);
-    const start = date || new Date();
-    const end = new Date(start.getTime() + 3600000); // +1 hour
+    const start = date ?? new Date();
     setFormData({
       title: "",
-      start: start.toISOString().slice(0, 16),
-      end: end.toISOString().slice(0, 16),
+      start: toDateTimeInputValue(start),
+      // La fine è facoltativa: parte vuota, la si imposta solo se serve.
+      end: "",
       allDay: false,
       color: "blue",
       description: "",

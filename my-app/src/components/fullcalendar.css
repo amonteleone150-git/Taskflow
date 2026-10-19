@@ -21,6 +21,16 @@
   --fc-more-link-hover-bg-color: var(--card);
 }
 
+/* FullCalendar definisce queste variabili su :root con valori fissi chiari
+   (#fff, grigio neutro) usati da viste/agenda: qui le allineiamo ai token del
+   tema e con specificità maggiore, così valgono anche in modalità scura. */
+.fc.fc-theme-standard {
+  --fc-page-bg-color: var(--card);
+  --fc-neutral-bg-color: var(--card-muted);
+  --fc-neutral-text-color: var(--muted);
+  --fc-list-event-hover-bg-color: var(--card-muted);
+}
+
 .fc-theme-standard {
   border-color: var(--border);
 }
@@ -38,7 +48,7 @@
   border-color: var(--border);
 }
 
-.fc-theme-standard .fc-scrollgrid-section-liquid > td {
+.fc-theme-standard .fc-scrollgrid-section-liquid>td {
   border-bottom-color: var(--border);
 }
 
@@ -181,34 +191,46 @@
   border-collapse: collapse;
 }
 
-.fc-theme-standard .fc-list-heading {
+/* In FullCalendar v6 l'intestazione del giorno dell'agenda è
+   .fc-list-day / .fc-list-day-cushion (non più .fc-list-heading). */
+.fc-theme-standard .fc-list-day-cushion {
   background-color: var(--card-muted);
-  border-color: var(--border);
-}
-
-.fc-theme-standard .fc-list-heading-main {
+  color: var(--foreground);
   padding: 0.5rem 0.75rem;
   font-weight: 600;
+}
+
+.fc-theme-standard .fc-list-day-text,
+.fc-theme-standard .fc-list-day-side-text {
   color: var(--foreground);
-}
-
-.fc-theme-standard .fc-list-item {
-  border-color: var(--border);
-}
-
-.fc-theme-standard .fc-list-item:hover {
-  background-color: var(--card-muted);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .fc-theme-standard .fc-list-event {
+  color: var(--foreground);
   text-decoration: none;
-  color: inherit;
-  display: block;
+  cursor: pointer;
+}
+
+/* Nell'agenda l'evento è una <tr>: padding e layout vanno applicati alle
+   celle, altrimenti si rompe la struttura della tabella.
+   Il colore dell'evento è mostrato dal pallino (.fc-list-event-dot). */
+.fc-theme-standard .fc-list-event td {
   padding: 0.5rem 0.75rem;
+  vertical-align: middle;
+  border-color: var(--border);
+}
+
+/* Specificità maggiore della regola di default di FullCalendar
+   (--fc-list-event-hover-bg-color: #f5f5f5), così l'hover segue il tema. */
+.fc.fc-theme-standard .fc-list-event:hover td {
+  background-color: var(--card-muted);
 }
 
 .fc-theme-standard .fc-list-event-title {
   font-weight: 500;
+  color: var(--foreground);
 }
 
 .fc-theme-standard .fc-list-event-time {
@@ -217,13 +239,8 @@
   white-space: nowrap;
 }
 
-.fc-theme-standard .fc-list-event-graphic {
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  margin-right: 0.5rem;
-  vertical-align: middle;
+.fc-theme-standard .fc-list-event-dot {
+  --fc-list-event-dot-width: 10px;
 }
 
 .fc-theme-standard .fc-button {
@@ -318,47 +335,6 @@
   color: var(--foreground);
 }
 
-/* Event colors */
-.fc-event.bg-blue-500 {
-  background-color: #3b82f6 !important;
-  border-color: #3b82f6 !important;
-}
-
-.fc-event.bg-emerald-500 {
-  background-color: #10b981 !important;
-  border-color: #10b981 !important;
-}
-
-.fc-event.bg-amber-500 {
-  background-color: #f59e0b !important;
-  border-color: #f59e0b !important;
-}
-
-.fc-event.bg-rose-500 {
-  background-color: #f43f5e !important;
-  border-color: #f43f5e !important;
-}
-
-.fc-event.bg-violet-500 {
-  background-color: #8b5cf6 !important;
-  border-color: #8b5cf6 !important;
-}
-
-.fc-event.bg-pink-500 {
-  background-color: #ec4899 !important;
-  border-color: #ec4899 !important;
-}
-
-.fc-event.bg-orange-500 {
-  background-color: #f97316 !important;
-  border-color: #f97316 !important;
-}
-
-.fc-event.bg-teal-500 {
-  background-color: #14b8a6 !important;
-  border-color: #14b8a6 !important;
-}
-
 /* All day events */
 .fc-daygrid-day-events .fc-event {
   margin-bottom: 0.125rem;
@@ -390,9 +366,9 @@
     font-size: 0.625rem;
   }
 
-  .fc-list-heading-main {
+  .fc-list-day-text,
+  .fc-list-day-side-text {
     font-size: 0.875rem;
-    padding: 0.375rem 0.5rem;
   }
 
   .fc-list-event-time {
@@ -412,10 +388,6 @@
 }
 
 .dark .fc-theme-standard .fc-col-header {
-  background-color: #0d1424;
-}
-
-.dark .fc-theme-standard .fc-list-heading {
   background-color: #0d1424;
 }
 

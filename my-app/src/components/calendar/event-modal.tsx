@@ -1,4 +1,4 @@
-import { eventColorOptions } from "@/lib/calendar";
+import { eventColorOptions, toDateTimeInputValue } from "@/lib/calendar";
 import type { EventFormData } from "@/components/calendar/use-calendar-events";
 
 type EventModalProps = {
@@ -63,14 +63,30 @@ export function EventModal({
                 id="start"
                 type="datetime-local"
                 value={formData.start}
-                onChange={(e) => onFormChange({ ...formData, start: e.target.value })}
+                onChange={(e) => {
+                  const start = e.target.value;
+                  const next: EventFormData = { ...formData, start };
+                  // Se la fine non è più successiva al nuovo inizio la
+                  // riallineo (+1 ora) invece di bloccare il salvataggio.
+                  if (
+                    !formData.allDay &&
+                    formData.end &&
+                    start &&
+                    new Date(formData.end) <= new Date(start)
+                  ) {
+                    next.end = toDateTimeInputValue(
+                      new Date(new Date(start).getTime() + 3600000),
+                    );
+                  }
+                  onFormChange(next);
+                }}
                 className="w-full h-10 rounded-xl border bg-card-muted px-4 outline-none focus:border-accent"
               />
               {errors.start && <p className="mt-1 text-sm text-rose-500">{errors.start}</p>}
             </div>
             <div>
               <label htmlFor="end" className="block text-sm font-medium mb-1">
-                Fine
+                Fine <span className="font-normal text-muted">(opzionale)</span>
               </label>
               <input
                 id="end"
@@ -81,6 +97,9 @@ export function EventModal({
                 disabled={formData.allDay}
               />
               {errors.end && <p className="mt-1 text-sm text-rose-500">{errors.end}</p>}
+              {!formData.allDay && !formData.end && (
+                <p className="mt-1 text-xs text-muted">Senza fine l&apos;evento dura 1 ora.</p>
+              )}
             </div>
           </div>
 
@@ -104,12 +123,9 @@ export function EventModal({
                   key={opt.value}
                   type="button"
                   onClick={() => onFormChange({ ...formData, color: opt.value })}
-                  className={`relative w-10 h-10 rounded-full transition-transform ${
+                  className={`relative w-10 h-10 rounded-full transition-transform ${opt.bg} ${
                     formData.color === opt.value ? "scale-110 ring-2 ring-offset-2 ring-accent" : ""
                   }`}
-                  style={{
-                    backgroundColor: `var(--${opt.bg.replace("bg-", "")})`,
-                  }}
                   aria-label={opt.label}
                   aria-pressed={formData.color === opt.value}
                 >

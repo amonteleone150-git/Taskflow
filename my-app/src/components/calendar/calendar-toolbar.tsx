@@ -13,25 +13,27 @@ const views = [
 
 type CalendarToolbarProps = {
   view: CalendarView;
+  /** Titolo del periodo corrente (es. "ottobre 2026"), fornito da FullCalendar. */
+  periodLabel: string;
   onViewChange: (view: CalendarView) => void;
   onPrev: () => void;
-  onToday: () => void;
   onNext: () => void;
   onCreate: () => void;
 };
 
 export function CalendarToolbar({
   view,
+  periodLabel,
   onViewChange,
   onPrev,
-  onToday,
   onNext,
   onCreate,
 }: CalendarToolbarProps) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl border bg-card p-4 shadow-sm">
-      <div className="flex items-center gap-2">
+      <div className="flex items-baseline gap-2">
         <h2 className="text-xl font-semibold">Calendario</h2>
+        <span className="text-sm font-medium text-muted">{periodLabel}</span>
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <div className="flex items-center rounded-full border bg-card p-1" role="group" aria-label="Navigazione calendario">
@@ -42,13 +44,6 @@ export function CalendarToolbar({
             aria-label="Periodo precedente"
           >
             ‹
-          </button>
-          <button
-            type="button"
-            onClick={onToday}
-            className="rounded-full px-3 py-1 text-sm text-muted transition-colors hover:text-foreground"
-          >
-            Oggi
           </button>
           <button
             type="button"

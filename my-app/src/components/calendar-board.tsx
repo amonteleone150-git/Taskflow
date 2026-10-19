@@ -7,9 +7,7 @@ import timeGridPlugin from "@fullcalendar/timegrid/index.js";
 import interactionPlugin from "@fullcalendar/interaction/index.js";
 import listPlugin from "@fullcalendar/list/index.js";
 import "./fullcalendar.css";
-import { eventColors, type EventColor } from "@/lib/calendar";
 import { CalendarToolbar, type CalendarView } from "@/components/calendar/calendar-toolbar";
-import { ColorLegend } from "@/components/calendar/color-legend";
 import { EventModal } from "@/components/calendar/event-modal";
 import { useCalendarEvents } from "@/components/calendar/use-calendar-events";
 
@@ -31,6 +29,7 @@ export function CalendarBoard() {
   } = useCalendarEvents();
 
   const [view, setView] = useState<CalendarView>("dayGridMonth");
+  const [periodLabel, setPeriodLabel] = useState("");
   const calendarRef = useRef<FullCalendar>(null);
 
   function handleDateClick(info: { date: Date; allDay: boolean }) {
@@ -57,10 +56,6 @@ export function CalendarBoard() {
     calendarRef.current?.getApi().next();
   }
 
-  function handleToday() {
-    calendarRef.current?.getApi().today();
-  }
-
   if (!loaded) {
     return (
       <div className="flex flex-1 items-center justify-center">
@@ -74,9 +69,9 @@ export function CalendarBoard() {
       {/* Toolbar personalizzata */}
       <CalendarToolbar
         view={view}
+        periodLabel={periodLabel}
         onViewChange={handleViewChange}
         onPrev={handlePrev}
-        onToday={handleToday}
         onNext={handleNext}
         onCreate={() => openCreateModal()}
       />
@@ -107,17 +102,12 @@ export function CalendarBoard() {
           dateClick={handleDateClick}
           eventClick={handleEventClick}
           eventDisplay="block"
-          eventDidMount={(info) => {
-            const color = info.event.extendedProps.color as EventColor | undefined;
-            if (color && eventColors[color]) {
-              const { bg, border } = eventColors[color];
-              info.el.style.backgroundColor = "";
-              info.el.style.borderColor = "";
-              info.el.classList.add(bg, border);
-            }
-          }}
+          defaultTimedEventDuration="01:00"
           datesSet={(info) => {
             setView(info.view.type as CalendarView);
+            // Titolo del periodo localizzato (es. "ottobre 2026"), si aggiorna
+            // automaticamente al cambio di vista e di mese.
+            setPeriodLabel(info.view.title);
           }}
           dayCellDidMount={(info) => {
             if (info.date.toDateString() === new Date().toDateString()) {
@@ -126,9 +116,6 @@ export function CalendarBoard() {
           }}
         />
       </div>
-
-      {/* Legenda colori */}
-      <ColorLegend />
 
       {/* Modal per creare/modificare eventi */}
       {modalOpen && (

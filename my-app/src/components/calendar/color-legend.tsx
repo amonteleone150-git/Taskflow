@@ -8,13 +8,9 @@ export function ColorLegend() {
         {eventColorOptions.map((opt) => (
           <span
             key={opt.value}
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium"
-            style={{
-              backgroundColor: `var(--${opt.bg.replace("bg-", "")})`,
-              color: "white",
-            }}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium text-white ${opt.bg}`}
           >
-            <span className={`w-2 h-2 rounded-full ${opt.bg}`} />
+            <span className="w-2 h-2 rounded-full bg-white/80" />
             {opt.label}
           </span>
         ))}

@@ -44,6 +44,21 @@ export type CalendarEvent = {
 
 export const CALENDAR_STORAGE_KEY = "taskflow.calendar.v1";
 
+/**
+ * Converte una Date in una stringa per input `datetime-local`
+ * ("YYYY-MM-DDTHH:mm") usando l'ora LOCALE.
+ * Nota: usare `toISOString()` sposterebbe la data al giorno precedente
+ * per i fusi orari positivi (es. Italia).
+ */
+export function toDateTimeInputValue(date: Date): string {
+  const pad = (value: number) => String(value).padStart(2, "0");
+  return [
+    date.getFullYear(),
+    pad(date.getMonth() + 1),
+    pad(date.getDate()),
+  ].join("-") + `T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
 export function createEventId(): string {
   return createIdWithPrefix("event");
 }
