@@ -1,30 +1,34 @@
-TASKFLOW v1.0.0 🚀
+🚀 TASKFLOW v1.0.0
 
-La prima release ufficiale di TASKFLOW!
+The first official release of TASKFLOW!
 
-TASKFLOW è un task manager responsive progettato per organizzare le attività in modo semplice e intuitivo.
+TASKFLOW is a responsive task manager designed to help you organize your daily activities in a simple and intuitive way.
 
-✨ Funzionalità principali
+✨ Features
+✅ Task Management — Organize and manage your daily tasks.
+📅 Calendar & Agenda — Keep track of your activities and schedule.
+🔎 Filters — Find and organize tasks more easily.
+📱 Responsive Design — Optimized for desktop and mobile devices.
+💾 Local Data Storage — Tasks and related data are stored locally in your browser using localStorage.
+🎨 Redesigned UI
 
-Gestione delle attività
-Calendario e agenda
-Filtri per organizzare le attività
-Interfaccia responsive per desktop e dispositivi mobili
-Salvataggio dei dati tramite localStorage
+This release introduces a completely redesigned user interface, featuring a more modern visual style and an improved user experience.
 
-🎨 Nuovo design
+!TASKFLOW v1.0.0 Screenshot
 
-Interfaccia completamente rinnovata, con un'esperienza visiva più moderna e curata.
-
-🛠️ Tecnologie
-
+🛠️ Tech Stack
 Next.js
 React
 TypeScript
 Tailwind CSS
+📌 Notes
 
-📌 Note
+This version uses localStorage to store data locally in the browser. Database integration, user authentication, and cloud synchronization may be considered for future releases.
 
-Questa versione utilizza localStorage per salvare i dati localmente nel browser. Database e autenticazione potranno essere introdotti in versioni future.
+🙌 Thank You
 
-Grazie a tutti coloro che esploreranno TASKFLOW!
+Thank you to everyone who takes the time to explore TASKFLOW!
+
+If you find a bug or have suggestions for improvement, feel free to open an issue in the repository.
+
+Enjoy TASKFLOW v1.0.0! 🚀
