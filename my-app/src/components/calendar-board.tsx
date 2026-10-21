@@ -59,7 +59,7 @@ export function CalendarBoard() {
   if (!loaded) {
     return (
       <div className="flex flex-1 items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-2 border-accent border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
       </div>
     );
   }
@@ -77,7 +77,7 @@ export function CalendarBoard() {
       />
 
       {/* FullCalendar */}
-      <div className="rounded-2xl border bg-card overflow-hidden shadow-sm">
+      <div className="overflow-hidden rounded-lg border border-border-subtle bg-surface shadow-subtle">
         <FullCalendar
           ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin] as any}
@@ -108,11 +108,6 @@ export function CalendarBoard() {
             // Titolo del periodo localizzato (es. "ottobre 2026"), si aggiorna
             // automaticamente al cambio di vista e di mese.
             setPeriodLabel(info.view.title);
-          }}
-          dayCellDidMount={(info) => {
-            if (info.date.toDateString() === new Date().toDateString()) {
-              info.el.classList.add("bg-accent/5");
-            }
           }}
         />
       </div>

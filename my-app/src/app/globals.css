@@ -2,71 +2,204 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* -------------------------------------------------------------------------- */
+/*  Design tokens — DocuForge (DESIGN.md)                                     */
+/* -------------------------------------------------------------------------- */
+
 :root {
-  --background: #ffffff;
-  --foreground: #0b1120;
-  --muted: #64748b;
-  --card: #ffffff;
-  --card-muted: #f8fafc;
-  --border: #e2e8f0;
-  --accent: #6366f1;
-  --accent-soft: #eef2ff;
-  --accent-foreground: #ffffff;
+  color-scheme: light;
+
+  /* Superfici */
+  --background: #fafafa;
+  --surface: #ffffff;
+  --surface-muted: #f4f4f5;
+
+  /* Testo */
+  --foreground: #18181b;
+  --muted: #6b7280;
+  --muted-strong: #52525b;
+  --subtle: #71717a;
+
+  /* Bordi */
+  --border: #e4e4e7;
+  --border-subtle: #f4f4f5;
+  --input-hover: #d4d4d8;
+
+  /* Primario (blu) */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --primary-soft: #eff6ff;
+  --accent: #2563eb;
+
+  /* Secondario (viola) — accenti non interattivi */
+  --secondary: #7c3aed;
+  --secondary-soft: #f5f3ff;
+  --secondary-foreground: #ffffff;
+
+  /* Stati */
+  --success: #16a34a;
+  --success-soft: #f0fdf4;
+  --warning: #ca8a04;
+  --warning-soft: #fff7ed;
+  --error: #dc2626;
+  --error-strong: #b91c1c;
+  --error-soft: #fef2f2;
+  --error-fill: #dc2626;
+  --error-fill-hover: #b91c1c;
+
+  /* Elevazione */
+  --elevation-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --elevation-medium: 0 4px 12px 0 rgb(0 0 0 / 0.06);
+  --elevation-large: 0 12px 32px 0 rgb(0 0 0 / 0.1);
 }
 
 .dark {
-  --background: #060911;
-  --foreground: #e2e8f0;
-  --muted: #94a3b8;
-  --card: #0d1424;
-  --card-muted: #111a2e;
-  --border: #1e293b;
-  --accent: #818cf8;
-  --accent-soft: #1e1b4b;
-  --accent-foreground: #060911;
+  color-scheme: dark;
+
+  /* Superfici derivate dai neutri del DESIGN.md */
+  --background: #09090b;
+  --surface: #18181b;
+  --surface-muted: #232327;
+
+  /* Testo */
+  --foreground: #fafafa;
+  --muted: #a1a1aa;
+  --muted-strong: #d4d4d8;
+  --subtle: #8b8b93;
+
+  /* Bordi */
+  --border: #2e2e34;
+  --border-subtle: #232327;
+  --input-hover: #3f3f46;
+
+  /* Primario (blu) */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --primary-soft: #172554;
+  --accent: #60a5fa;
+
+  /* Secondario (viola) */
+  --secondary: #a78bfa;
+  --secondary-soft: #2e1065;
+  --secondary-foreground: #09090b;
+
+  /* Stati */
+  --success: #4ade80;
+  --success-soft: #052e16;
+  --warning: #facc15;
+  --warning-soft: #422006;
+  --error: #f87171;
+  --error-strong: #ef4444;
+  --error-soft: #450a0a;
+  --error-fill: #dc2626;
+  --error-fill-hover: #b91c1c;
+
+  /* Elevazione */
+  --elevation-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.45);
+  --elevation-medium: 0 4px 12px 0 rgb(0 0 0 / 0.5);
+  --elevation-large: 0 12px 32px 0 rgb(0 0 0 / 0.6);
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Tailwind theme                                                            */
+/* -------------------------------------------------------------------------- */
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
-  --color-card: var(--card);
-  --color-card-muted: var(--card-muted);
+  --color-muted-strong: var(--muted-strong);
+  --color-subtle: var(--subtle);
+
   --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-input-hover: var(--input-hover);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
   --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-foreground: var(--accent-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-soft: var(--secondary-soft);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-error: var(--error);
+  --color-error-strong: var(--error-strong);
+  --color-error-soft: var(--error-soft);
+  --color-error-fill: var(--error-fill);
+  --color-error-fill-hover: var(--error-fill-hover);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-plus-jakarta), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  --shadow-subtle: var(--elevation-subtle);
+  --shadow-medium: var(--elevation-medium);
+  --shadow-large: var(--elevation-large);
 }
 
-* {
-  border-color: var(--border);
-}
+/* -------------------------------------------------------------------------- */
+/*  Base                                                                      */
+/* -------------------------------------------------------------------------- */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    background: var(--background);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+  }
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--accent-foreground);
-}
-
-.glow {
-  background-image: radial-gradient(
-      60rem 30rem at 50% -10%,
-      color-mix(in oklab, var(--accent) 22%, transparent),
-      transparent 70%
-    );
+  background: var(--primary);
+  color: var(--primary-foreground);
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -75,5 +208,5 @@ body {
 }
 
 .animate-rise {
-  animation: rise 0.4s ease-out both;
+  animation: rise 0.3s ease-out both;
 }

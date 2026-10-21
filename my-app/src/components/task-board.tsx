@@ -56,25 +56,27 @@ export function TaskBoard() {
         onClearCompleted={clearCompleted}
       />
 
-      <ul className="flex flex-col gap-2">
-        {visible.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            editing={editingId === task.id}
-            draftTitle={draftTitle}
-            onDraftTitleChange={setDraftTitle}
-            onToggle={() => toggleTask(task.id)}
-            onRemove={() => removeTask(task.id)}
-            onStartEdit={() => startEdit(task)}
-            onCommitEdit={commitEdit}
-            onCancelEdit={() => setEditingId(null)}
-          />
-        ))}
-      </ul>
+      {visible.length > 0 && (
+        <ul className="flex flex-col overflow-hidden rounded-lg border border-border-subtle bg-surface shadow-subtle">
+          {visible.map((task) => (
+            <TaskItem
+              key={task.id}
+              task={task}
+              editing={editingId === task.id}
+              draftTitle={draftTitle}
+              onDraftTitleChange={setDraftTitle}
+              onToggle={() => toggleTask(task.id)}
+              onRemove={() => removeTask(task.id)}
+              onStartEdit={() => startEdit(task)}
+              onCommitEdit={commitEdit}
+              onCancelEdit={() => setEditingId(null)}
+            />
+          ))}
+        </ul>
+      )}
 
       {loaded && visible.length === 0 && (
-        <p className="rounded-2xl border border-dashed py-10 text-center text-muted">
+        <p className="rounded-lg border border-dashed border-border bg-surface py-12 text-center text-sm text-muted">
           Nessuna attività qui. Aggiungine una per iniziare! ✨
         </p>
       )}

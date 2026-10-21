@@ -1,34 +1,47 @@
 /* FullCalendar Core Styles - Minimal subset for v6 */
 /* Source: https://github.com/fullcalendar/fullcalendar */
+/* Adattato ai token del design system DocuForge (DESIGN.md). */
 
 .fc {
   direction: ltr;
+  font-family: var(--font-sans);
   font-size: 1em;
   --fc-border-color: var(--border);
-  --fc-button-bg-color: var(--card);
+  --fc-page-bg-color: var(--surface);
+  --fc-neutral-bg-color: var(--surface-muted);
+  --fc-neutral-text-color: var(--muted);
+  --fc-today-bg-color: var(--primary-soft);
+  --fc-now-indicator-color: var(--error);
+  --fc-event-bg-color: var(--primary);
+  --fc-event-border-color: var(--primary);
+  --fc-event-text-color: var(--primary-foreground);
+  --fc-more-link-bg-color: var(--surface-muted);
+  --fc-more-link-hover-bg-color: var(--surface);
+  --fc-list-event-hover-bg-color: var(--surface-muted);
+  --fc-button-bg-color: var(--surface);
   --fc-button-border-color: var(--border);
   --fc-button-text-color: var(--foreground);
-  --fc-button-hover-bg-color: var(--card-muted);
+  --fc-button-hover-bg-color: var(--surface-muted);
   --fc-button-hover-border-color: var(--border);
-  --fc-button-active-bg-color: var(--accent);
-  --fc-button-active-border-color: var(--accent);
-  --fc-button-active-text-color: var(--accent-foreground);
-  --fc-today-bg-color: color-mix(in oklab, var(--accent) 10%, transparent);
-  --fc-event-bg-color: var(--accent);
-  --fc-event-border-color: var(--accent);
-  --fc-event-text-color: var(--accent-foreground);
-  --fc-more-link-bg-color: var(--card-muted);
-  --fc-more-link-hover-bg-color: var(--card);
+  --fc-button-active-bg-color: var(--primary);
+  --fc-button-active-border-color: var(--primary);
+  --fc-button-active-text-color: var(--primary-foreground);
 }
 
 /* FullCalendar definisce queste variabili su :root con valori fissi chiari
    (#fff, grigio neutro) usati da viste/agenda: qui le allineiamo ai token del
    tema e con specificità maggiore, così valgono anche in modalità scura. */
 .fc.fc-theme-standard {
-  --fc-page-bg-color: var(--card);
-  --fc-neutral-bg-color: var(--card-muted);
+  --fc-page-bg-color: var(--surface);
+  --fc-neutral-bg-color: var(--surface-muted);
   --fc-neutral-text-color: var(--muted);
-  --fc-list-event-hover-bg-color: var(--card-muted);
+  --fc-list-event-hover-bg-color: var(--surface-muted);
+}
+
+/* In tema scuro il blu pieno della colonna "oggi" sarebbe troppo invadente:
+   usiamo una tinta trasparente coerente con la superficie. */
+.dark .fc-theme-standard {
+  --fc-today-bg-color: color-mix(in oklab, var(--primary) 16%, transparent);
 }
 
 .fc-theme-standard {
@@ -48,19 +61,27 @@
   border-color: var(--border);
 }
 
-.fc-theme-standard .fc-scrollgrid-section-liquid>td {
+.fc-theme-standard .fc-scrollgrid-section-liquid > td {
   border-bottom-color: var(--border);
 }
 
 .fc-theme-standard .fc-col-header {
-  background-color: var(--card-muted);
+  background-color: var(--surface-muted);
 }
 
 .fc-theme-standard .fc-col-header-cell {
   border-color: var(--border);
   padding: 0.5rem;
-  font-weight: 500;
-  color: var(--foreground);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fc-theme-standard .fc-col-header-cell-cushion {
+  color: inherit;
+  text-decoration: none;
 }
 
 .fc-theme-standard .fc-daygrid-day {
@@ -84,31 +105,32 @@
   background-color: var(--fc-today-bg-color);
 }
 
-.fc-theme-standard .fc-daygrid-day.fc-day-past {
-  opacity: 0.7;
-}
-
-.fc-theme-standard .fc-daygrid-day.fc-day-future {
-  opacity: 1;
+.fc-theme-standard .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .fc-theme-standard .fc-daygrid-day.fc-day-other {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .fc-theme-standard .fc-daygrid-event {
   margin: 0.125rem 0.25rem;
   padding: 0.125rem 0.375rem;
-  border-radius: 0.375rem;
+  border-radius: 4px;
   font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: opacity 0.15s ease;
 }
 
 .fc-theme-standard .fc-daygrid-event:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.9;
+}
+
+.fc-theme-standard .fc-daygrid-event .fc-event-time {
+  font-weight: 600;
 }
 
 .fc-theme-standard .fc-daygrid-event .fc-event-title {
@@ -125,7 +147,7 @@
   text-decoration: none;
   padding: 0.125rem 0.375rem;
   margin: 0 0.25rem;
-  border-radius: 0.375rem;
+  border-radius: 4px;
   background-color: var(--fc-more-link-bg-color);
 }
 
@@ -154,24 +176,22 @@
 
 .fc-theme-standard .fc-timegrid-event {
   margin: 0.125rem;
-  border-radius: 0.375rem;
+  border-radius: 4px;
   font-size: 0.75rem;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.15s ease;
+  transition: opacity 0.15s ease;
 }
 
 .fc-theme-standard .fc-timegrid-event:hover {
-  opacity: 0.85;
-  transform: translateX(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0.92;
   z-index: 10;
 }
 
 .fc-theme-standard .fc-timegrid-event .fc-event-time {
   font-weight: 600;
   padding: 0.125rem 0.375rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgb(0 0 0 / 0.12);
 }
 
 .fc-theme-standard .fc-timegrid-event .fc-event-title {
@@ -194,7 +214,7 @@
 /* In FullCalendar v6 l'intestazione del giorno dell'agenda è
    .fc-list-day / .fc-list-day-cushion (non più .fc-list-heading). */
 .fc-theme-standard .fc-list-day-cushion {
-  background-color: var(--card-muted);
+  background-color: var(--surface-muted);
   color: var(--foreground);
   padding: 0.5rem 0.75rem;
   font-weight: 600;
@@ -217,7 +237,7 @@
    celle, altrimenti si rompe la struttura della tabella.
    Il colore dell'evento è mostrato dal pallino (.fc-list-event-dot). */
 .fc-theme-standard .fc-list-event td {
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 0.75rem;
   vertical-align: middle;
   border-color: var(--border);
 }
@@ -225,7 +245,7 @@
 /* Specificità maggiore della regola di default di FullCalendar
    (--fc-list-event-hover-bg-color: #f5f5f5), così l'hover segue il tema. */
 .fc.fc-theme-standard .fc-list-event:hover td {
-  background-color: var(--card-muted);
+  background-color: var(--surface-muted);
 }
 
 .fc-theme-standard .fc-list-event-title {
@@ -240,7 +260,7 @@
 }
 
 .fc-theme-standard .fc-list-event-dot {
-  --fc-list-event-dot-width: 10px;
+  --fc-list-event-dot-width: 8px;
 }
 
 .fc-theme-standard .fc-button {
@@ -250,9 +270,12 @@
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0.375rem 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .fc-theme-standard .fc-button:hover:not(:disabled) {
@@ -266,7 +289,7 @@
 }
 
 .fc-theme-standard .fc-button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -278,7 +301,7 @@
 
 .fc-theme-standard .fc-button-group {
   display: inline-flex;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -288,21 +311,21 @@
 }
 
 .fc-theme-standard .fc-button-group .fc-button:first-child {
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .fc-theme-standard .fc-button-group .fc-button:last-child {
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   border-right-width: 1px;
 }
 
 .fc .fc-popover {
-  background-color: var(--card);
+  background-color: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: var(--elevation-large);
   z-index: 100;
 }
 
@@ -310,8 +333,8 @@
   padding: 0.5rem 0.75rem;
   font-weight: 600;
   border-bottom: 1px solid var(--border);
-  background-color: var(--card-muted);
-  border-radius: 0.75rem 0.75rem 0 0;
+  background-color: var(--surface-muted);
+  border-radius: 12px 12px 0 0;
 }
 
 .fc .fc-popover-body {
@@ -344,9 +367,14 @@
    Nota: i selettori usano `.fc-theme-standard` per pareggiare la specificità
    delle regole base più sopra, altrimenti (essendo più specifiche) vincono loro. */
 @media (max-width: 640px) {
+  .fc-theme-standard .fc-col-header-cell {
+    padding: 0.375rem 0.25rem;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+
   .fc-theme-standard .fc-col-header-cell-cushion {
-    padding: 0.25rem 0.125rem;
-    font-size: 0.75rem;
+    padding: 0;
   }
 
   .fc-theme-standard .fc-daygrid-day-number {
@@ -365,7 +393,7 @@
   .fc-theme-standard .fc-daygrid-event {
     margin: 0.0625rem 0.125rem;
     padding: 0.0625rem 0.25rem;
-    border-radius: 0.25rem;
+    border-radius: 4px;
     font-size: 0.625rem;
   }
 
@@ -405,51 +433,27 @@
   }
 }
 
-/* Dark mode adjustments */
-.dark .fc-theme-standard {
-  --fc-border-color: #1e293b;
-  --fc-button-bg-color: #0d1424;
-  --fc-button-border-color: #1e293b;
-  --fc-button-text-color: #e2e8f0;
-  --fc-button-hover-bg-color: #111a2e;
-  --fc-button-hover-border-color: #1e293b;
-  --fc-today-bg-color: color-mix(in oklab, #818cf8 15%, transparent);
-}
-
-.dark .fc-theme-standard .fc-col-header {
-  background-color: #0d1424;
-}
-
-.dark .fc-theme-standard .fc-timegrid-slot {
-  border-color: #1e293b;
-}
-
-.dark .fc .fc-popover {
-  background-color: #0d1424;
-  border-color: #1e293b;
-}
-
-.dark .fc .fc-popover-header {
-  background-color: #111a2e;
-  border-color: #1e293b;
-}
-
 /* Scrollbar styling for calendar */
+.fc-scroller {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
 .fc-scroller::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 .fc-scroller::-webkit-scrollbar-track {
-  background: var(--card-muted);
+  background: var(--surface-muted);
   border-radius: 3px;
 }
 
 .fc-scroller::-webkit-scrollbar-thumb {
-  background: var(--muted);
+  background: var(--border);
   border-radius: 3px;
 }
 
 .fc-scroller::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
+  background: var(--muted);
 }

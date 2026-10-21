@@ -21,9 +21,9 @@ export const priorityLabels: Record<Priority, string> = {
 };
 
 export const priorityStyles: Record<Priority, string> = {
-  low: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-  medium: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-  high: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+  low: "bg-success-soft text-success",
+  medium: "bg-warning-soft text-warning",
+  high: "bg-error-soft text-error",
 };
 
 export function createId(): string {

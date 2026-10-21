@@ -12,12 +12,14 @@ export function Features() {
 
 function FeatureCard({ feature }: { feature: typeof features[0] }) {
   return (
-    <article className="group rounded-2xl border bg-card p-6 shadow-sm transition-all hover:border-accent/50 hover:shadow-md">
-      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+    <article className="group rounded-lg border border-border-subtle bg-surface p-6 shadow-subtle transition-shadow hover:shadow-medium">
+      <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary-soft text-accent">
         {feature.icon}
       </div>
-      <h3 className="mb-2 text-lg font-medium">{feature.title}</h3>
-      <p className="text-sm text-muted">{feature.description}</p>
+      <h3 className="mb-2 font-display text-base font-semibold tracking-[0.01em] text-foreground">
+        {feature.title}
+      </h3>
+      <p className="text-sm leading-[1.6] text-muted">{feature.description}</p>
     </article>
   );
 }

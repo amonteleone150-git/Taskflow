@@ -21,16 +21,16 @@ export function TaskFilters({
 }: TaskFiltersProps) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <div className="flex gap-1 rounded-full border bg-card p-1">
+      <div className="flex items-center gap-0.5 rounded-lg bg-surface-muted p-1">
         {filters.map((item) => (
           <button
             key={item.value}
             type="button"
             onClick={() => onFilterChange(item.value)}
-            className={`rounded-full px-3 py-1 text-sm transition-colors ${
+            className={`rounded px-3 py-1.5 text-sm font-medium transition-colors ${
               filter === item.value
-                ? "bg-accent text-accent-foreground"
-                : "text-muted hover:text-foreground"
+                ? "bg-primary-soft text-accent"
+                : "text-muted-strong hover:bg-surface hover:text-foreground"
             }`}
           >
             {item.label}
@@ -41,7 +41,7 @@ export function TaskFilters({
         type="button"
         onClick={onClearCompleted}
         disabled={completed === 0}
-        className="text-sm text-muted transition-colors hover:text-foreground disabled:opacity-40"
+        className="rounded-lg px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-error-soft hover:text-error disabled:pointer-events-none disabled:opacity-40"
       >
         Elimina completate
       </button>
