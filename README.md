@@ -32,3 +32,11 @@ Thank you to everyone who takes the time to explore TASKFLOW!
 If you find a bug or have suggestions for improvement, feel free to open an issue in the repository.
 
 Enjoy TASKFLOW v1.0.0! 🚀
+
+INSTRUCTIONS FOR TESTING TASKFLOW
+Ensure that Node.js is installed on your computer.
+Open the project in a terminal.
+Navigate to the my-app folder.
+Run npm install to install the dependencies.
+Run npm run dev to start the development server.
+Open your browser and navigate to http://localhost:3000 to access TaskFlow.
