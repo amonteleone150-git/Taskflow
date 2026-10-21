@@ -30,9 +30,9 @@ export function CalendarToolbar({
   onCreate,
 }: CalendarToolbarProps) {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl border bg-card p-4 shadow-sm">
+    <div className="flex flex-col gap-3 rounded-2xl border bg-card p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-4">
       <div className="flex items-baseline gap-2">
-        <h2 className="text-xl font-semibold">Calendario</h2>
+        <h2 className="text-lg font-semibold sm:text-xl">Calendario</h2>
         <span className="text-sm font-medium text-muted">{periodLabel}</span>
       </div>
       <div className="flex flex-wrap items-center gap-2">
@@ -40,7 +40,7 @@ export function CalendarToolbar({
           <button
             type="button"
             onClick={onPrev}
-            className="rounded-full px-2.5 py-1 text-sm text-muted transition-colors hover:text-foreground"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground sm:h-auto sm:w-auto sm:px-2.5 sm:py-1"
             aria-label="Periodo precedente"
           >
             ‹
@@ -48,7 +48,7 @@ export function CalendarToolbar({
           <button
             type="button"
             onClick={onNext}
-            className="rounded-full px-2.5 py-1 text-sm text-muted transition-colors hover:text-foreground"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground sm:h-auto sm:w-auto sm:px-2.5 sm:py-1"
             aria-label="Periodo successivo"
           >
             ›
@@ -61,7 +61,7 @@ export function CalendarToolbar({
               type="button"
               onClick={() => onViewChange(v.value)}
               aria-pressed={view === v.value}
-              className={`rounded-full px-3 py-1 text-sm transition-colors ${
+              className={`rounded-full px-2 py-1 text-xs transition-colors sm:px-3 sm:text-sm ${
                 view === v.value
                   ? "bg-accent text-accent-foreground"
                   : "text-muted hover:text-foreground"
@@ -74,7 +74,7 @@ export function CalendarToolbar({
         <button
           type="button"
           onClick={onCreate}
-          className="h-10 rounded-xl bg-accent px-5 font-medium text-accent-foreground transition-opacity hover:opacity-90"
+          className="h-10 w-full rounded-xl bg-accent px-5 font-medium text-accent-foreground transition-opacity hover:opacity-90 sm:w-auto"
         >
           Nuovo evento
         </button>

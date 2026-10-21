@@ -21,16 +21,16 @@ export function EventModal({
   onDelete,
 }: EventModalProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-md rounded-2xl bg-card p-6 shadow-xl animate-rise">
-        <div className="flex items-center justify-between mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3 sm:p-4">
+      <div className="w-full max-w-md max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-2xl bg-card p-4 shadow-xl animate-rise sm:max-h-[calc(100dvh-2rem)] sm:p-6">
+        <div className="mb-4 flex items-center justify-between">
           <h3 className="text-lg font-semibold">
             {editing ? "Modifica evento" : "Nuovo evento"}
           </h3>
           <button
             type="button"
             onClick={onClose}
-            className="text-muted hover:text-foreground"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-card-muted hover:text-foreground"
             aria-label="Chiudi"
           >
             ✕
@@ -54,7 +54,7 @@ export function EventModal({
             {errors.title && <p className="mt-1 text-sm text-rose-500">{errors.title}</p>}
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label htmlFor="start" className="block text-sm font-medium mb-1">
                 Inizio *
@@ -123,8 +123,10 @@ export function EventModal({
                   key={opt.value}
                   type="button"
                   onClick={() => onFormChange({ ...formData, color: opt.value })}
-                  className={`relative w-10 h-10 rounded-full transition-transform ${opt.bg} ${
-                    formData.color === opt.value ? "scale-110 ring-2 ring-offset-2 ring-accent" : ""
+                  className={`relative h-10 w-10 rounded-full transition-transform ${opt.bg} ${
+                    formData.color === opt.value
+                      ? "scale-110 ring-2 ring-accent ring-offset-2 ring-offset-card"
+                      : ""
                   }`}
                   aria-label={opt.label}
                   aria-pressed={formData.color === opt.value}
@@ -153,11 +155,11 @@ export function EventModal({
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t">
+          <div className="flex flex-col gap-2 border-t pt-4 sm:flex-row sm:justify-end sm:gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="h-10 rounded-xl border border-muted/50 px-5 font-medium text-muted transition-colors hover:border-muted hover:text-foreground"
+              className="h-11 w-full rounded-xl border border-muted/50 px-5 font-medium text-muted transition-colors hover:border-muted hover:text-foreground sm:h-10 sm:w-auto"
             >
               Annulla
             </button>
@@ -165,14 +167,14 @@ export function EventModal({
               <button
                 type="button"
                 onClick={onDelete}
-                className="h-10 rounded-xl bg-rose-500/10 px-5 font-medium text-rose-500 transition-colors hover:bg-rose-500/20"
+                className="h-11 w-full rounded-xl bg-rose-500/10 px-5 font-medium text-rose-500 transition-colors hover:bg-rose-500/20 sm:h-10 sm:w-auto"
               >
                 Elimina
               </button>
             )}
             <button
               type="submit"
-              className="h-10 rounded-xl bg-accent px-5 font-medium text-accent-foreground transition-opacity hover:opacity-90"
+              className="h-11 w-full rounded-xl bg-accent px-5 font-medium text-accent-foreground transition-opacity hover:opacity-90 sm:h-10 sm:w-auto"
             >
               {editing ? "Salva" : "Crea"}
             </button>

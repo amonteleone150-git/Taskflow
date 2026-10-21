@@ -11,7 +11,7 @@ const links = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-20 border-b bg-background/80 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-6 py-3">
+      <div className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-semibold">
           <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-sm text-accent-foreground">
             ✓
@@ -23,12 +23,12 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-3 py-1.5 text-sm text-muted transition-colors hover:bg-card-muted hover:text-foreground"
+              className="whitespace-nowrap rounded-full px-2.5 py-1.5 text-sm text-muted transition-colors hover:bg-card-muted hover:text-foreground sm:px-3"
             >
               {link.label}
             </Link>
           ))}
-          <div className="ml-2">
+          <div className="ml-1 sm:ml-2">
             <ThemeToggle />
           </div>
         </nav>

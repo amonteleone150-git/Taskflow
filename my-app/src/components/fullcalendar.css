@@ -340,38 +340,67 @@
   margin-bottom: 0.125rem;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments.
+   Nota: i selettori usano `.fc-theme-standard` per pareggiare la specificità
+   delle regole base più sopra, altrimenti (essendo più specifiche) vincono loro. */
 @media (max-width: 640px) {
-  .fc-col-header-cell-cushion {
+  .fc-theme-standard .fc-col-header-cell-cushion {
     padding: 0.25rem 0.125rem;
     font-size: 0.75rem;
   }
 
-  .fc-daygrid-day-number {
+  .fc-theme-standard .fc-daygrid-day-number {
     font-size: 0.75rem;
   }
 
-  .fc-timegrid-axis-cushion {
+  .fc-theme-standard .fc-daygrid-day-top {
+    padding: 0.125rem 0.25rem;
+  }
+
+  .fc-theme-standard .fc-timegrid-axis-cushion {
     font-size: 0.625rem;
     padding: 0.125rem 0.25rem;
   }
 
-  .fc-button {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-  }
-
-  .fc-daygrid-event,
-  .fc-timegrid-event {
+  .fc-theme-standard .fc-daygrid-event {
+    margin: 0.0625rem 0.125rem;
+    padding: 0.0625rem 0.25rem;
+    border-radius: 0.25rem;
     font-size: 0.625rem;
   }
 
-  .fc-list-day-text,
-  .fc-list-day-side-text {
+  .fc-theme-standard .fc-timegrid-event {
+    font-size: 0.625rem;
+  }
+
+  /* Su schermi stretti le celle non hanno spazio per l'orario:
+     mostriamo solo il titolo dell'evento. */
+  .fc-theme-standard .fc-daygrid-event .fc-event-time,
+  .fc-theme-standard .fc-timegrid-event .fc-event-time {
+    display: none;
+  }
+
+  /* Il popover "altri eventi" non deve mai superare lo schermo. */
+  .fc .fc-popover {
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  .fc .fc-popover-body {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  /* Agenda: colonne più compatte. */
+  .fc-theme-standard .fc-list-event td {
+    padding: 0.5rem;
+  }
+
+  .fc-theme-standard .fc-list-day-text,
+  .fc-theme-standard .fc-list-day-side-text {
     font-size: 0.875rem;
   }
 
-  .fc-list-event-time {
+  .fc-theme-standard .fc-list-event-time {
     font-size: 0.75rem;
   }
 }
