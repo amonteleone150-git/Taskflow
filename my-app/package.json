@@ -1,10 +1,11 @@
+
 {
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start"
   },
   "dependencies": {
@@ -14,7 +15,6 @@
     "@fullcalendar/interaction": "^6.1.21",
     "@fullcalendar/list": "^6.1.21",
     "@fullcalendar/react": "^6.1.21",
-    "@fullcalendar/timegrid": "^6.1.21",
     "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
     "better-auth": "^1.7.16",
