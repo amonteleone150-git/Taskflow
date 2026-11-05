@@ -1,10 +1,10 @@
 "use client";
 
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid/index.js";
-import timeGridPlugin from "@fullcalendar/timegrid/index.js";
-import interactionPlugin from "@fullcalendar/interaction/index.js";
-import listPlugin from "@fullcalendar/list/index.js";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
 import "./fullcalendar.css";
 import { CalendarToolbar } from "@/components/calendar/calendar-toolbar";
 import { EventModal } from "@/components/calendar/event-modal";
