@@ -14,6 +14,14 @@ export type Filter = "all" | "active" | "done";
 
 export const STORAGE_KEY = "taskflow.tasks.v1";
 
+/**
+ * Chiave localStorage isolata per utente: i dati di un account non sono
+ * visibili agli altri account nello stesso browser.
+ */
+export function getTasksStorageKey(userId: string): string {
+  return `${STORAGE_KEY}.${userId}`;
+}
+
 export const priorityLabels: Record<Priority, string> = {
   low: "Bassa",
   medium: "Media",
@@ -44,14 +52,14 @@ export function isTask(value: unknown): value is Task {
   );
 }
 
-/** Legge i task salvati; ritorna `null` se non esistono dati validi. */
-export function loadTasks(): Task[] | null {
-  return readStoredArray(STORAGE_KEY, isTask);
+/** Legge i task dell'utente; ritorna `null` se non esistono dati validi. */
+export function loadTasks(userId: string): Task[] | null {
+  return readStoredArray(getTasksStorageKey(userId), isTask);
 }
 
-/** Persiste i task nel localStorage. */
-export function saveTasks(tasks: Task[]): void {
-  writeStoredJson(STORAGE_KEY, tasks);
+/** Persiste i task dell'utente nel localStorage. */
+export function saveTasks(userId: string, tasks: Task[]): void {
+  writeStoredJson(getTasksStorageKey(userId), tasks);
 }
 
 export const seedTasks: Task[] = [

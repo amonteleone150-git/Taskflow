@@ -1,8 +1,16 @@
-"use client";
+import { CalendarBoard } from "@/components/calendar/calendar-board";
+import { requireUser } from "@/lib/session";
 
-import { CalendarBoard } from "@/components/calendar-board";
+export const instant = false;
 
-export default function CalendarPage() {
+export const metadata = {
+  title: "Calendario",
+  description: "Organizza i tuoi eventi personali su Taskflow.",
+};
+
+export default async function CalendarPage() {
+  const user = await requireUser();
+
   return (
     <div className="flex flex-1 flex-col items-center px-3 py-6 sm:px-4 sm:py-10">
       <div className="w-full max-w-5xl">
@@ -15,7 +23,7 @@ export default function CalendarPage() {
             agenda.
           </p>
         </header>
-        <CalendarBoard />
+        <CalendarBoard userId={user.id} />
       </div>
     </div>
   );

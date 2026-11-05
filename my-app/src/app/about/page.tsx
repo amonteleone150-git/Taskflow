@@ -23,7 +23,8 @@ export default function AboutPage() {
             <FeatureItem>Filtro per stato: tutte, da fare, completate</FeatureItem>
             <FeatureItem>Modifica inline con doppio click</FeatureItem>
             <FeatureItem>Caledario integrato</FeatureItem>
-            <FeatureItem>Persistenza nel localStorage del browser</FeatureItem>
+            <FeatureItem>Persistenza nel localStorage, separata per account</FeatureItem>
+            <FeatureItem>Registrazione, accesso e sessione protetta</FeatureItem>
             <FeatureItem>Tema chiaro/scuro con preferenza salvata</FeatureItem>
             <FeatureItem>Barra di progresso e statistiche</FeatureItem>
           </ul>
@@ -35,7 +36,7 @@ export default function AboutPage() {
           </h2>
           <ul className="space-y-2.5 text-[15px] leading-[1.7] text-muted">
             <li>
-              <strong className="font-medium text-foreground">Next.js 15</strong>{" "}
+              <strong className="font-medium text-foreground">Next.js 16</strong>{" "}
               — App Router, Server Components
             </li>
             <li>
@@ -49,6 +50,14 @@ export default function AboutPage() {
             <li>
               <strong className="font-medium text-foreground">TypeScript</strong> —
               Tipizzazione statica
+            </li>
+            <li>
+              <strong className="font-medium text-foreground">Prisma 7 + Neon</strong>{" "}
+              — PostgreSQL e sessioni persistenti
+            </li>
+            <li>
+              <strong className="font-medium text-foreground">Better Auth</strong> —
+              Autenticazione email/password
             </li>
           </ul>
         </section>

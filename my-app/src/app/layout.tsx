@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Fira_Code, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
+import { SiteHeader } from "@/components/layout/site-header";
 
 const inter = Inter({
   variable: "--font-inter",

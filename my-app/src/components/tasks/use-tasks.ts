@@ -1,23 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createId, type Filter, type Priority, type Task } from "@/lib/tasks";
 import {
-  createId,
-  loadTasks,
-  saveTasks,
-  seedTasks,
-  type Filter,
-  type Priority,
-  type Task,
-} from "@/lib/tasks";
+  filterTasks,
+  getTaskStats,
+} from "@/components/tasks/task-selectors";
+import { usePersistedTasks } from "@/components/tasks/use-persisted-tasks";
 
 /**
  * Gestisce stato, persistenza e operazioni CRUD delle attività.
  * Estratto da task-board.tsx per separare la logica dalla presentazione.
  */
-export function useTasks() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [loaded, setLoaded] = useState(false);
+export function useTasks(userId: string) {
+  const { loaded, tasks, setTasks } = usePersistedTasks(userId);
   const [title, setTitle] = useState("");
   const [priority, setPriority] = useState<Priority>("medium");
   const [filter, setFilter] = useState<Filter>("all");
@@ -25,17 +21,9 @@ export function useTasks() {
   const [draftTitle, setDraftTitle] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Caricamento iniziale dal localStorage.
   useEffect(() => {
-    setTasks(loadTasks() ?? seedTasks);
-    setLoaded(true);
-  }, []);
-
-  // Persistenza ad ogni modifica.
-  useEffect(() => {
-    if (!loaded) return;
-    saveTasks(tasks);
-  }, [tasks, loaded]);
+    setEditingId(null);
+  }, [userId]);
 
   function addTask(event: React.FormEvent) {
     event.preventDefault();
@@ -93,16 +81,8 @@ export function useTasks() {
     setTasks((prev) => prev.filter((task) => !task.done));
   }
 
-  const visible = useMemo(() => {
-    if (filter === "active") return tasks.filter((task) => !task.done);
-    if (filter === "done") return tasks.filter((task) => task.done);
-    return tasks;
-  }, [tasks, filter]);
-
-  const remaining = tasks.filter((task) => !task.done).length;
-  const completed = tasks.length - remaining;
-  const progress =
-    tasks.length === 0 ? 0 : Math.round((completed / tasks.length) * 100);
+  const visible = useMemo(() => filterTasks(tasks, filter), [tasks, filter]);
+  const { remaining, completed, progress } = getTaskStats(tasks);
 
   return {
     loaded,

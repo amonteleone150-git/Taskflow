@@ -1,5 +1,7 @@
 import type { RefObject } from "react";
 import type { Priority } from "@/lib/tasks";
+import { TextField } from "@/components/ui/text-field";
+import { Button } from "@/components/ui/button";
 
 type TaskFormProps = {
   title: string;
@@ -35,6 +37,7 @@ export function TaskForm({
         className="h-[42px] flex-1 rounded-lg border border-border bg-surface px-3.5 text-sm text-foreground outline-none transition-colors placeholder:text-subtle hover:border-input-hover focus:border-primary focus:shadow-[0_0_0_1px_var(--primary)]"
       />
       <select
+        id="task-priority"
         value={priority}
         onChange={(event) => onPriorityChange(event.target.value as Priority)}
         aria-label="Priorità"
@@ -44,12 +47,9 @@ export function TaskForm({
         <option value="medium">Media</option>
         <option value="high">Alta</option>
       </select>
-      <button
-        type="submit"
-        className="h-[42px] rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-subtle transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
+      <Button type="submit">
         Aggiungi
-      </button>
+      </Button>
     </form>
   );
 }
